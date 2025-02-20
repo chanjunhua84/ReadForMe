@@ -1,9 +1,9 @@
-streamlit
-easyocr
-numpy
-gTTS
-Pillow
 transformers
+torch
+easyocr
+gTTS
 deep-translator
 opencv-python
 validators
+Pillow
+streamlit
