@@ -1,1 +1,9 @@
 streamlit
+easyocr
+numpy
+gTTS
+Pillow
+transformers
+deep-translator
+opencv-python
+validators
