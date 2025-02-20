@@ -128,7 +128,6 @@ if 'prev_uploaded_file' not in st.session_state:
 if target_language != "Blank":
     # Image upload or camera input logic
     image = None
-    uploaded_file = None
 
     if input_method == "Upload Image":
         uploaded_file = st.sidebar.file_uploader("Upload an Image (or Scan QR)", type=["jpg", "jpeg", "png"])
@@ -153,10 +152,9 @@ if target_language != "Blank":
         # QR Code Detection using OpenCV
         qr_info = extract_qr_code(image)
 
-        # Store current values in session state, only if uploaded_file exists
+        # Store current values in session state
         st.session_state.prev_language = target_language
-        if uploaded_file is not None:
-            st.session_state.prev_uploaded_file = uploaded_file
+        st.session_state.prev_uploaded_file = uploaded_file
         st.session_state.prev_qr_info = qr_info
 
         # Show QR Code Information at the top
