@@ -1,9 +1,25 @@
-streamlit==1.15.0
-easyocr==1.5.0
-gTTS==2.2.3
-Pillow==9.1.0
-transformers==4.30.0
-deep-translator==1.9.1
-opencv-python==4.7.0.72
-validators==0.20.0
-torch==2.1.0
+# Core libraries for the app
+streamlit==1.16.0
+transformers==4.26.1
+torch==1.13.0
+opencv-python-headless==4.6.0.66  # OpenCV headless, if GUI support isn't required
+numpy==1.23.5  # Adjust according to compatibility with your environment
+
+# Optional but useful packages
+rich==13.9.4
+markdown-it-py==3.0.0
+pygments==2.19.1
+scikit-learn==1.0.2  # If you're using machine learning models
+
+# Package for streamlit to detect Python errors
+scikit-build==0.18.1
+cmake==3.31.4
+setuptools==75.8.0
+wheel==0.45.1
+
+# Other useful libraries
+requests==2.28.2  # If you're making HTTP requests
+pandas==1.5.3     # If you're using DataFrames for any kind of data manipulation
+matplotlib==3.7.1  # For plotting
+
+# Make sure you're using compatible versions with your environment, especially NumPy
