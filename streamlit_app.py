@@ -8,6 +8,7 @@ from deep_translator import GoogleTranslator
 import cv2
 import validators  # Added to check for URLs
 import time
+import os  # For file handling
 
 # Function to auto-rotate an image based on its EXIF data
 def auto_rotate_image(image: Image) -> Image:
@@ -212,12 +213,17 @@ if target_language != "Blank":
             with st.spinner("Generating speech..."):
                 time.sleep(1)  # Simulating loading time (remove it for actual processing)
                 tts = gTTS(text=translated_text, lang=languages[target_language], slow=False)
-                tts.save("output.mp3")
+                audio_path = "output.mp3"
+                tts.save(audio_path)
 
-            st.audio("output.mp3", format="audio/mp3")
+            st.audio(audio_path, format="audio/mp3")
 
             # Section break
             st.markdown("---")
 
             # Download buttons
-            st.download_button("Download Audio", "output.mp3", file_name="speech.mp3")
+            st.download_button("Download Audio", audio_path, file_name="speech.mp3", mime="audio/mp3")
+
+            # Cleanup audio file after download
+            if os.path.exists(audio_path):
+                os.remove(audio_path)  # Remove the saved audio file after use
