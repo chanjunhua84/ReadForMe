@@ -29,8 +29,16 @@ def auto_rotate_image(image: Image) -> Image:
 
 # Function to extract QR Code info using OpenCV and check for URL
 def extract_qr_code(image: Image) -> str:
-    image_cv = np.array(image)
-    gray = cv2.cvtColor(image_cv, cv2.COLOR_RGB2GRAY)  # Convert to grayscale
+    # Convert image to RGB and then to NumPy array
+    image_cv = np.array(image.convert('RGB'))
+    
+    if image_cv is None:
+        st.error("Image failed to load.")
+        return None
+    
+    # Convert to grayscale
+    gray = cv2.cvtColor(image_cv, cv2.COLOR_RGB2GRAY)
+    
     qr_detector = cv2.QRCodeDetector()
     retval, decoded_info, points, straight_qrcode = qr_detector.detectAndDecodeMulti(gray)
 
