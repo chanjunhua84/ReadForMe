@@ -76,8 +76,18 @@ if uploaded_file and target_language != "Blank":
         if isinstance(qr_info, str) and qr_info.startswith("Invalid QR code"):
             st.error(qr_info)
         else:
+            # Summarizing QR code information
             st.subheader("QR Code Information:")
-            st.write(" | ".join(qr_info))
+            qr_summary = " | ".join(qr_info)
+            st.write(qr_summary)
+            
+            with st.spinner("Summarizing QR code info..."):
+                time.sleep(1)
+                summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+                summarized_qr_info = summarizer(qr_summary, max_length=150, min_length=50, do_sample=False)[0]["summary_text"]
+                
+            st.subheader("QR Code Information Summary:")
+            st.write(summarized_qr_info)
     else:
         st.subheader("No QR Code Found. Proceeding with OCR...")
         st.markdown("---")
