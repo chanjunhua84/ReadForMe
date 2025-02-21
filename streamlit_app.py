@@ -87,6 +87,7 @@ if uploaded_file and target_language != "Blank":
             qr_summary = " | ".join(qr_info)
             st.write(qr_summary)
             
+            # Summarize QR Code Information
             with st.spinner("Summarizing QR code info..."):
                 time.sleep(1)
                 summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
@@ -94,6 +95,27 @@ if uploaded_file and target_language != "Blank":
                 
             st.subheader("QR Code Information Summary:")
             st.write(summarized_qr_info)
+            st.markdown("---")
+            
+            # Translate QR Code Summary
+            with st.spinner("Translating QR code info..."):
+                time.sleep(1)
+                translator = GoogleTranslator(source="en", target=languages[target_language])
+                translated_qr_info = translator.translate(summarized_qr_info)
+            
+            st.subheader(f"Translated QR Code Info ({target_language}):")
+            st.write(translated_qr_info)
+            st.download_button("Download Translation", translated_qr_info, file_name="translated_qr_info.txt", mime="text/plain")
+            st.markdown("---")
+            
+            # Generate Audio for Translated QR Code Info
+            with st.spinner("Generating speech..."):
+                time.sleep(1)
+                tts = gTTS(text=translated_qr_info, lang=languages[target_language], slow=False)
+                tts.save("output_qr_info.mp3")
+            
+            st.audio("output_qr_info.mp3", format="audio/mp3")
+            st.download_button("Download Audio", "output_qr_info.mp3", file_name="qr_info_speech.mp3")
     else:
         st.subheader("No QR Code Found. Proceeding with OCR...")
         st.markdown("---")
