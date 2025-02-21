@@ -1,13 +1,19 @@
 import streamlit as st
-import easyocr
-import numpy as np
-from gtts import gTTS
-from PIL import Image
-from transformers import pipeline
-from deep_translator import GoogleTranslator
-import cv2
-import validators  # Added to check for URLs
-import time
+
+# Handle ImportError exceptions for the required packages
+try:
+    import easyocr
+    import numpy as np
+    from gtts import gTTS
+    from PIL import Image
+    from transformers import pipeline
+    from deep_translator import GoogleTranslator
+    import cv2
+    import validators
+    import time
+except ImportError as e:
+    st.error(f"Error: {e.name} is not installed. Please install the missing package to proceed.")
+    st.stop()  # Stop further execution if a package is missing
 
 # Function to auto-rotate an image based on its EXIF data
 def auto_rotate_image(image: Image) -> Image:
