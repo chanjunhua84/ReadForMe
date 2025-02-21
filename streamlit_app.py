@@ -9,7 +9,6 @@ import cv2
 import validators  # Added to check for URLs
 import time
 import os  # For file handling
-import asyncio
 
 # Function to auto-rotate an image based on its EXIF data
 def auto_rotate_image(image: Image) -> Image:
