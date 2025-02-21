@@ -10,7 +10,6 @@ import validators  # Added to check for URLs
 import time
 import os  # For file handling
 import asyncio
-asyncio.set_event_loop(asyncio.new_event_loop())
 
 # Function to auto-rotate an image based on its EXIF data
 def auto_rotate_image(image: Image) -> Image:
