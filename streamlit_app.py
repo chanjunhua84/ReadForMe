@@ -11,12 +11,11 @@ import time
 import os  # For file handling
 import asyncio
 
-# Ensure Streamlit doesn't break due to async event loop conflicts
+# Fix for "RuntimeError: no running event loop"
 try:
     asyncio.get_running_loop()
 except RuntimeError:
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
+    asyncio.set_event_loop(asyncio.new_event_loop())
 
 # Load summarization model
 model_name = "facebook/bart-large-cnn"
